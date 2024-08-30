@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Future Code Logo">
+            <h1>FUTURE CODE</h1>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <span>Main Dashboard -> Real Estate General Analytics -></span>
+        <span class="active">Detailed History</span>
+    </div>
+
+    <div class="filter-section">
+        <label for="filter">Filter By</label>
+        <select id="filter">
+            <option value="">Select an option</option>
+            <option value="date">Date</option>
+            <option value="rating">Rating</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Date Accessed</th>
+                <th>Pool (secs)</th>
+                <th>Apartment (secs)</th>
+                <th>Bedroom (secs)</th>
+                <th>Gym (secs)</th>
+                <th>Session Time (secs)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.date }}</td>
+                <td>{{ user.Pool }}</td>
+                <td>{{ user.oldapt }}</td>
+                <td>{{ user.newapt }}</td>
+                <td>{{ user.gym }}</td>
+                <td>{{ user.session_time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add a new Model URL -->
+    <div class="model-form">
+        <h2>Add New Model</h2>
+        <form action="/add_model" method="post">
+            <label for="model_url">Model URL:</label>
+            <input type="text" id="model_url" name="model_url" placeholder="Enter Model URL" required>
+            <button type="submit">Add Model</button>
+        </form>
+    </div>
+</body>
+
+</html>
